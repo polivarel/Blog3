@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 from App_administrador.views import *
 from App_eventos.views import *
@@ -25,9 +27,13 @@ from App_usuarios.views import *
 
 urlpatterns = [
     path("eventoFormulario/", evento, name="evento_Formulario"),
-    path("pages/", leerEventos, name="leerEventos"),
+    path("leerEventos/", leerEventos, name="leerEventos"),
     path("eliminarEvento/<id>", eliminarEvento, name="eliminarEvento"),
     path("editarEvento/<id>", editarEvento, name="editarEvento"),
     path("pages/<id>", leerMas, name="leerMas"),    
     
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)

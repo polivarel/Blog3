@@ -4,19 +4,15 @@
 
 {% block cuerpo %}
     {% if mensaje %}
-        <p>Bienvenido  <b>{{ mensaje }}</b> ! <br> Redireccionando en <b><span id="redirecionando">4</span></b></p>
-        <script>
-            var segundos = 4;
-            var redirecionando = document.getElementById("redirecionando");
-            var intervalo = setInterval(function(){
-                segundos--;
-                redirecionando.innerHTML = segundos;
-                if(segundos == 0){
-                    clearInterval(intervalo);
-                    irA("/");
-                }
-            }, 1000);
-        </script>
+
+        {% if mensaje == "ok" %}
+            <p>Bienvenido! <br> Redireccionando a eventos en <b><span id="redirecionando">3</span></b></p>
+            <script>var segundos = 3;var redirecionando = document.getElementById("redirecionando");var intervalo = setInterval(function(){segundos--;redirecionando.innerHTML = segundos;if(segundos == 0){clearInterval(intervalo);window.location.replace("/App_eventos/leerEventos/");}}, 1000);</script>
+        {% else %}
+            <p>Error, Usuario o clave incorrecto.  <br> Intente de nuevo en <b><span id="redirecionando">3</span></b></p>
+            <script>var segundos = 3;var redirecionando = document.getElementById("redirecionando");var intervalo = setInterval(function(){segundos--;redirecionando.innerHTML = segundos;if(segundos == 0){clearInterval(intervalo);window.location.replace("/App_usuarios/ingresar/");}}, 1000);</script>
+        {% endif %}
+
     {% else %}
         <form action="{% url 'form_ingresar_usuario' %}" method="POST"> {% csrf_token %}
             <table>

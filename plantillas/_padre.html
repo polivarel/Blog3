@@ -52,7 +52,7 @@
                 flex-direction: row;
                 width: 100%;
                 background-color:#E5E5E5;
-                height: 60px;
+                min-height: 70px !important;
                 z-index:1999 ;
                 margin: 0;
                 border: none;
@@ -110,33 +110,26 @@
                 <div class="menu_salir">
                     {% if not user.is_authenticated %}
                         <a class="nav-link" href="{% url 'form_crear_usuario' %}">Registrarse</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                         <a class="nav-link" href="{% url 'form_ingresar_usuario' %}">Iniciar Sesion</a>
 
                     {% else %}
                         {% if user.is_superuser %}
-                        <a href="{% url 'listar_usuarios' %}">
-                            <div  class="menu_hover_item" style="color:black; text-decoration:none; margin-right:40px ;">
-                                {{ user }}@admin
-                                <img src="{% static 'assets/img/icono_admin.png' %}"     height="50px">
-                            </div>
-                        </a>
-                        <a href="{% url 'salir' %}">
-                            <div  class="menu_hover_item" style="color:black; text-decoration:none; margin-right:20px ;">
-                                <a href="{% url 'salir' %}"> <img src="{% static 'assets/img/icono_salir.png' %}"     height="50px"> 
-                            </div>
-                        </a>
+                        <a href="{% url 'listar_usuarios' %}">{{ user }}@admin</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="nav-menu_hover_item" href="{% url 'salir' %}">Cerrar Sesion</a>
+                      
                         {% else %}
-                            <a href="{% url 'salir' %}">
-                            <div  class="menu_hover_item" style="color:black; text-decoration:none;">{{ user }}@user
-                            <img src="{% static 'assets/img/icono_salir.png' %}"     height="50px"></div></a>
+                            <a class="nav-menu_hover_item" href="{% url 'ver_perfil' %}">{{ user.username }}</a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a class="nav-menu_hover_item" href="{% url 'salir' %}">Cerrar Sesion</a>
                         {% endif %}
                     {% endif %}
                 </div>
             </div>
             <div id="titulo">
-                <h1 class="display-4 fw-bolder">Reseñas de espectaculos y deportes</h1>
-                <p class="lead fw-normal text-white-50 mb-0">Conozca toda la informacion de su evento favorito.</p>
+                <p style="font-size:25px;">Reseñas de espectaculos y deportes</h0>&nbsp;&nbsp;&nbsp;&nbsp;
+                <p style="font-size:20px;">Conozca toda la informacion de su evento favorito.</p>
             </div>
         </div>
 

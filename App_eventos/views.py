@@ -40,12 +40,16 @@ def evento(request):
             imagen=informacion['imagen']
             evento=Evento_db(propietario=propietario, titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autor, fecha=fecha, imagen=imagen)
             evento.save()
-            return render(request, "eventoFormulario.html",{"mensaje":"Evento creado correctamente"})
+            return render(request, "leerEventos.html",{"mensaje":"Evento creado correctamente"})
         else:
             return render(request, "eventoFormulario.html",{"mensaje":"Formulario invalido"})
     else:
         form=EventoForm()
         return render(request, "eventoFormulario.html", {"formulario_evento":form})
+
+
+
+
 
 def leerEventos(request):
     eventos=Evento_db.objects.all()

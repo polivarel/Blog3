@@ -22,9 +22,18 @@ from App_mensajeria.views import *
 from App_principal.views import *
 from App_usuarios.views import *
 
+from django.contrib import admin
+from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path("about/", about, name="about"),
     path("pages/", leerEventos, name="leerEventos"),
 
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)

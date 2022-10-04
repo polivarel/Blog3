@@ -5,14 +5,24 @@
 {% block cuerpo %}
 
 <h1>LISTADO DE ENTRADAS DEL BLOG</h1>
-
+<a href="{% url 'evento_Formulario' %}"><input type="button" value="AGREGAR UN EVENTO" ></a>
 {% if eventos %}
-
+<style>
+    .div_evento{
+        height: 200px;
+        width: 200px;
+        border: 1px solid gray;
+    }
+    
+</style>
 <ul>
     {% for evento in eventos %}  
-    <h4>{{ evento.titulo }}, {{ evento.subtitulo }}, {{ evento.fecha }}, {{ evento.autor }} <a href="{% url 'leerMas' evento.id %}">Leer mas</a> </h4>
-    <a class="btn btn-danger" href="{% url 'eliminarEvento' evento.id %}">ELIMINAR</a>
-    <a class="btn btn-success" href="{% url 'editarEvento' evento.id %}">EDITAR</a>
+        <div class="div_evento">
+            <img src="{{ evento.imagen.url }}" alt="Fondo">
+            <h4>{{ evento.titulo }}, {{ evento.subtitulo }}, {{ evento.fecha }}, {{ evento.autor }} <a href="{% url 'leerMas' evento.id %}">Leer mas</a> </h4>
+            <a class="btn btn-danger" href="{% url 'eliminarEvento' evento.id %}">ELIMINAR</a>
+            <a class="btn btn-success" href="{% url 'editarEvento' evento.id %}">EDITAR</a>
+        </div>
     {% endfor %} 
 
 </ul>

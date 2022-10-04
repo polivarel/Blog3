@@ -24,7 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8b1d6a6+l%qj9u6__u&(=$=aormdsd7hqkfj!2-(!j*)u*g)z%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 LOGIN_REDIRECT_URL = '/'
@@ -93,10 +94,12 @@ DATABASES = {
             'NAME': 'Entrega_Final',
             'USER': 'linroot',
             'PASSWORD': '9BRARl1yNIGzK#KD',
-            'HOST': 'lin-9697-6070-mysql-primary.servers.linodedb.net',
-            'PORT': '3306',
-            'OPTIONS':{'ssl': { 'ca':'Python_proyect-ca-certificate.crt' },
-    }
+            #'PASSWORD': 'oqu8@G71wqgAIlw2',
+            'HOST': '200.125.44.42',
+            #'HOST': 'lin-9795-6121-mysql-primary.servers.linodedb.net',
+            'PORT': '3333',
+            #'OPTIONS':{'ssl': { 'ca':'Python_proyect-ca-certificate.crt' },
+    #}
         }
     }
 
@@ -135,7 +138,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR,"static")
 # STATIC_URL = '/static/'
 # STATICFILES_DIRS = [
@@ -152,6 +155,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/ingresar'
 
+STATIC_URL = '/static/'
+STATICFILES_DIRS =[os.path.join(BASE_DIR,"static")]
 MEDIA_URL = '/media/'
-
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media_cdn/')
