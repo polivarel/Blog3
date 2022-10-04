@@ -18,7 +18,7 @@
 <ul>
     {% for evento in eventos %}  
         <div class="div_evento">
-            <img src="{{ evento.imagen.url }}" alt="Fondo">
+            <img src="{{ MEDIA_URL }}ScoobyDoo.jpg" class="{{ evento.imagen }}" alt="Fondo">
             <h4>{{ evento.titulo }}, {{ evento.subtitulo }}, {{ evento.fecha }}, {{ evento.autor }} <a href="{% url 'leerMas' evento.id %}">Leer mas</a> </h4>
             <a class="btn btn-danger" href="{% url 'eliminarEvento' evento.id %}">ELIMINAR</a>
             <a class="btn btn-success" href="{% url 'editarEvento' evento.id %}">EDITAR</a>

@@ -63,13 +63,14 @@ ROOT_URLCONF = 'Blog3.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR / 'plantillas' ],
+        'DIRS': [os.path.join(BASE_DIR, 'plantillas')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.media',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -94,12 +95,8 @@ DATABASES = {
             'NAME': 'Entrega_Final',
             'USER': 'linroot',
             'PASSWORD': '9BRARl1yNIGzK#KD',
-            #'PASSWORD': 'oqu8@G71wqgAIlw2',
             'HOST': '200.125.44.42',
-            #'HOST': 'lin-9795-6121-mysql-primary.servers.linodedb.net',
             'PORT': '3333',
-            #'OPTIONS':{'ssl': { 'ca':'Python_proyect-ca-certificate.crt' },
-    #}
         }
     }
 
@@ -157,5 +154,9 @@ LOGIN_URL = '/ingresar'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS =[os.path.join(BASE_DIR,"static")]
+
+
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR,'media_cdn/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'data/') # 'data' is my media folder
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media_cdn/')
