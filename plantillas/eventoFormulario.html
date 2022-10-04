@@ -1,0 +1,16 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+
+
+
+<form action="{% url 'evento_Formulario' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+    <table>
+        {{ formulario_evento.as_table }}
+    </table>
+    <input type="submit" value="Enviar">
+</form>
+{{ mensaje }}
+{% endblock %} 

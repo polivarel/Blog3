@@ -1,0 +1,17 @@
+{% extends "padrePosta.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+
+<p><center><h1>Bienvenido a tu perfil</h1></center><br>
+
+<h4>Usuario : {{ user.username }}</h4>
+<h4>Nombre : {{ user.first_name }}</h4>
+<h4>Apellido : {{ user.last_name }}</h4>
+<h4>Email : {{ user.email }}</h4>
+
+
+</p>
+
+{% endblock %} 

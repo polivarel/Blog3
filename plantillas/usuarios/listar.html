@@ -1,0 +1,52 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+    {% if usuarios %}
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+        th{
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+
+        <input type="button" value="Crear usuario" style="margin: 20px;" onclick="irA('/form_crear_usuario')">
+        <table> <tr><th>ID              </th><th>Usuario               </th><th>Nombre                  </th><th>Apellido               </th><th>Correo             </th><th>Editar</th><th>Borrar</th></tr>
+            {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.id }}</td>
+                    {% if usuario.is_superuser %}
+                        <td>{{ usuario.username }}@admin</td>
+                    {% else %}
+                        <td>{{ usuario.username }}@user</td>
+                    {% endif %}
+                    <td>{{ usuario.first_name }}</td>
+                    <td>{{ usuario.last_name }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td><a href="{% url 'form_editar_usuarios' usuario.id %}"><img src="{% static 'assets/img/icono_editar.png' %}"     height="30px"></a></td>
+                    <td><img onclick="BorrarUsuario( '{{ usuario.username }}','{{ usuario.id }}')" src="{% static 'assets/img/icono_borrar.png' %}"     height="30px"></td>
+                </tr>
+                <script>
+                    function BorrarUsuario(usuario,id){
+                        alertify.confirm('Cuidado', 'Desea borrar al usuario <b>'+ usuario + '</b>',
+                        function(){ irA("/eliminar_usuario/"+id); },
+                        function(){ alertify.error('No paso nada :)')}).set('labels', {ok:'Si, a la verga!', cancel:'Noo!'});
+                    }
+                </script>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No hay usuarios registrados.</p>
+    {% endif %}
+    
+
+{% endblock %}   

@@ -1,0 +1,26 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+
+<h1>LISTADO DE ENTRADAS DEL BLOG</h1>
+
+{% if eventos %}
+
+<ul>
+    {% for evento in eventos %}  
+    <h4>{{ evento.titulo }}, {{ evento.subtitulo }}, {{ evento.fecha }}, {{ evento.autor }} <a href="{% url 'leerMas' evento.id %}">Leer mas</a> </h4>
+    <a class="btn btn-danger" href="{% url 'eliminarEvento' evento.id %}">ELIMINAR</a>
+    <a class="btn btn-success" href="{% url 'editarEvento' evento.id %}">EDITAR</a>
+    {% endfor %} 
+
+</ul>
+
+{% else %}
+<p>NO SE ENCONTRARON ENTRADAS</p>
+
+{% endif %}
+
+
+{% endblock %} 
