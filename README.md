@@ -1,0 +1,1 @@
+Instalar chkeditor con pip
