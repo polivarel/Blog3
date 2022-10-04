@@ -1,23 +1,39 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
     <head>
 
-        {% load static %}
-        <meta charset="utf-8" />
+
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+
+<meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Reseñas de espectaculos artisticos y deportivos</title>
+        <!-- JavaScript-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{% static '/assets/favicon.ico' %}" />
-        <link rel="shortcut icon" href="{% static '/assets/favicon.ico' %}"/>
-        <link rel="ICON" href="{% static '/assets/favicon.ico' %}" type="image/ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static '/css/styles.css' %}" rel="stylesheet" />
+        <link rel="icon" type="image/x-icon" href="plantillas/static/assets/favicon.ico" />
+        <link rel="shortcut icon" href="static/assets/favicon.ico"/>
+        <link rel="ICON" href="http://127.0.0.1:8000/favicon.ico" type="image/ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        
+
         <style>
-            footer{ position:fixed; bottom:0; justify-content:center; height:100px; width: 100%; background: black;}
+            @font-face {
+                font-family: 'Ubuntu-Regular';
+                src: url("{% static '/ubuntu_font/Ubuntu-Regular.ttf' %}");
+            }
+            *{font-family: Ubuntu-Regular; margin: 0; padding: 0; box-sizing: border-box;}
+        .alertify{    z-index:999999 !important;}
             body{ 
                 background: #F1F1F1;
                 display: flex; 
@@ -27,71 +43,110 @@
                 height: 100%; 
                 flex-direction: column; overflow-y: auto; min-height: 100vh;
             }
+        #cabezal{
+            display: flex; flex-direction: column; flex-grow: 1; margin: 0; max-height:180px !important;
+        } 
+            #menu{
+                display: flex;
+                justify-content:space-between;
+                flex-direction: row;
+                width: 100%;
+                background-color:#E5E5E5;
+                height: 60px;
+                z-index:1999 ;
+                margin: 0;
+                border: none;
+                align-items:center;
+                
+            } #menu a {text-decoration: none; color:#6E6A6A;}
+            
+            .menu_inicio{margin-right: auto; margin-left:1% ;}
+            .menu_items{width:30%; display: flex;justify-content:center; }
+            .menu_salir{display: flex;  align-items:center; margin-left: auto; margin-right:1%; box-sizing: border-box;}
+            .menu_inicio a,.menu_items a,.menu_salir a{box-sizing: border-box; border-bottom: 2px solid #E5E5E5; border-top: 2px solid #E5E5E5;}
+            .menu_inicio a:hover,.menu_items a:hover,.menu_salir a:hover{
+                cursor: pointer; box-shadow: blue;
+                border-bottom: 2px solid grey; 
+                -webkit-transition: all 300ms ease;
+                -moz-transition:    all 300ms ease;
+                -ms-transition:     all 300ms ease;
+                -o-transition:      all 300ms ease;
+                transition:         all 300ms ease;
+            }
+            #titulo{
+                background:#343238 ;
+                font-size: 30px;
+                font-weight: bold;
+                color:#F1F1F1;
+                margin-left:0%;
+                margin-top:0%;
+                text-align: center;
+                padding: 10px;
+            }
+
+            #cuerpo{
+                display: flex; 
+                align-items:center; 
+                justify-content:center;
+                width: 100%;
+                height: 100%;
+                flex-direction: column;
+             }
+             #cuerpo form input{ margin-top: 10px;}
+            #pie{display: flex;  bottom:0; justify-content:center; width: 100%; background: #343238;}
         </style>
     </head>
-    
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Blog de reseñas de eventos</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">Sobre Nosotros</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'leerEventos' %}">Eventos</a></li>
-                        <!-- Desplegable de Eventos  <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="{% url 'leerEventos' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">Eventos</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">Cine</a></li>
-                                <li><a class="dropdown-item" href="#!">Teatro</a></li>
-                                <li><a class="dropdown-item" href="#!">Deportes</a></li>
-                            </ul>
-                        </li> -->
-                    </ul>
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        {% if user.is_authenticated %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'salir' %}">Cerrar Sesion</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'ver_perfil' %}">{{ user.username }}</a>
-                            </li>            
+    <body>
+        <div id="cabezal">
+            <div  id="menu">
+                <div class="menu_inicio">
+                    <a  href="#!">Blog de reseñas de eventos</a>
+                </div>
+                <div class="menu_items">
+                    <a  href="{% url 'index' %}"      >Inicio        </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a  href="{% url 'about' %}"      >Sobre Nosotros</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a  href="{% url 'leerEventos' %}">Eventos       </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="menu_salir">
+                    {% if not user.is_authenticated %}
+                        <a class="nav-link" href="{% url 'form_crear_usuario' %}">Registrarse</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="nav-link" href="{% url 'form_ingresar_usuario' %}">Iniciar Sesion</a>
+
+                    {% else %}
+                        {% if user.is_superuser %}
+                        <a href="{% url 'listar_usuarios' %}">
+                            <div  class="menu_hover_item" style="color:black; text-decoration:none; margin-right:40px ;">
+                                {{ user }}@admin
+                                <img src="{% static 'assets/img/icono_admin.png' %}"     height="50px">
+                            </div>
+                        </a>
+                        <a href="{% url 'salir' %}">
+                            <div  class="menu_hover_item" style="color:black; text-decoration:none; margin-right:20px ;">
+                                <a href="{% url 'salir' %}"> <img src="{% static 'assets/img/icono_salir.png' %}"     height="50px"> 
+                            </div>
+                        </a>
                         {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'form_crear_usuario' %}">Registrarse</a>
-                            </li>&nbsp;&nbsp;
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'form_ingresar_usuario' %}">Iniciar Sesion</a>
-                            </li>   
+                            <a href="{% url 'salir' %}">
+                            <div  class="menu_hover_item" style="color:black; text-decoration:none;">{{ user }}@user
+                            <img src="{% static 'assets/img/icono_salir.png' %}"     height="50px"></div></a>
                         {% endif %}
-                    </ul>
+                    {% endif %}
                 </div>
             </div>
-        </nav>
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Reseñas de espectaculos y deportes</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Conozca toda la informacion de su evento favorito.</p>
-                </div>
+            <div id="titulo">
+                <h1 class="display-4 fw-bolder">Reseñas de espectaculos y deportes</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Conozca toda la informacion de su evento favorito.</p>
             </div>
-        </header>
-        {% block cuerpo %}
+        </div>
 
-        {% endblock %}
-        <body>
-        
-        </body>
 
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; BLOG_3 2022<br>Proyecto Final - Python<br>Nicolas Villa - Pablo Olivare - Tomas Abraham</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="{% static 'js/scripts.js' %}"></script>
- 
-</html>
+        <div id="cuerpo">
+            {% block cuerpo %}
+            {% endblock %}
+        </div>
+        <div id="pie" style="color: rgb(255, 255, 255); padding:10px ;">
+            <p style="text-align:center ;">Copyright &copy; BLOG_3 2022<br>Proyecto Final - Python<br>Nicolas Villa - Pablo Olivare - Tomas Abraham</p>
+        </div>
+    </body>    
+
