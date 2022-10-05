@@ -1,0 +1,21 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+
+<h1> {{ evento.titulo }} </h1>
+
+<ul>
+     
+    <li>{{ evento.titulo }}</li>
+    <li>{{ evento.subtitulo }}</li> 
+    <li>{{ evento.fecha }}</li> 
+    <li>{{ evento.imagen }}</li>
+    <li>{{ evento.cuerpo }}</li>
+    <li>{{ evento.autor }}</li>
+    
+</ul>
+
+
+{% endblock %} 

@@ -1,0 +1,16 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+
+    <form action="{% url 'form_recuperar_usuario' %}" method="POST"> {% csrf_token %}
+        <table>
+            {{ formulario.as_table }}
+        </table>
+        <input type="submit" value="Recuperar" style="width:100%;">
+        <input type="button" value="Cancelar" style="width:100%;" onclick='irA("/")'>
+        <br>    
+    </form>
+{{ mensaje }}
+{% endblock %} 
