@@ -18,8 +18,10 @@
             color: white;
         }
     </style>
-
-        <input type="button" value="Crear usuario" style="margin: 20px;" onclick="irA('/form_crear_usuario')">
+        <a class="nav-menu_hover_item" href="{% url 'form_crear_usuario' %}">
+            <input type="button" value="Crear usuario" style="margin: 20px;">
+        </a>
+        
         <table> <tr><th>ID              </th><th>Usuario               </th><th>Nombre                  </th><th>Apellido               </th><th>Correo             </th><th>Editar</th><th>Borrar</th></tr>
             {% for usuario in usuarios %}
                 <tr>

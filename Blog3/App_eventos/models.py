@@ -13,7 +13,7 @@ class Evento_db(models.Model):
     #cuerpo     = models.CharField(max_length=1000,null=True)
     autor      = models.CharField(max_length=100,null=True)
     fecha      = models.DateField()
-    imagen     = models.ImageField(upload_to='media/',null=True)
+    imagen     = models.ImageField(upload_to='', default=None)
     
     def __str__(self):
 	    return self.titulo

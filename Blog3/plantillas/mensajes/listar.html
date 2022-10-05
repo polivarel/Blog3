@@ -24,8 +24,8 @@
             {% for usuario in usuarios %}
                 {% if usuario.username != user.username %}
                     <tr>
-                        <td>{{ usuario.username }} ( {{ usuario.first_name }} {{ usuario.last_name}} )</td>
-                        <td>{{usuarioLogeado}}<a href="{% url 'Form_mensajeA' usuario.id %}"><img src="{% static 'assets/img/icono_escribirMSJ.png' %}"     height="30px"></a></td>
+                        <td>{{ usuario.username }} {% if usuario.first_name != "" %} ( {{ usuario.first_name }} {{ usuario.last_name}} ){% endif %}</td>
+                        <td>{{usuarioLogeado}}<a href="{% url 'Form_mensajeA' usuario.id %}"><img src="{% static 'assets/img/icono_mensaje.png' %}"     height="30px"></a></td>
                     </tr>
                 {% endif %}
             {% endfor %}

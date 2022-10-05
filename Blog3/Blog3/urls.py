@@ -22,6 +22,8 @@ from App_mensajeria.views import *
 from App_principal.views import *
 from App_usuarios.views import *
 
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,4 +34,6 @@ urlpatterns = [
     path('App_mensajeria/'   , include('App_mensajeria.urls')),
     path('App_principal/'    , include('App_principal.urls')),
     path('App_usuarios/'     , include('App_usuarios.urls')),
-]
+
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
