@@ -47,10 +47,7 @@ def evento(request):
         form=EventoForm()
         return render(request, "eventoFormulario.html", {"formulario_evento":form})
 
-
-
-
-
+@login_required
 def leerEventos(request):
     eventos=Evento_db.objects.all()
     return render(request, "leerEventos.html", {"eventos": eventos})
@@ -64,7 +61,7 @@ def eliminarEvento(request, id):
 def editarEvento(request, id):
     evento=Evento_db.objects.get(id=id)
     if request.method=="POST":
-        form=EventoForm(request.POST, request.FILE)
+        form=EventoForm(request.POST, request.FILES)
         if form.is_valid():
             info=form.cleaned_data
             evento.propietario=info["propietario"]
@@ -77,17 +74,10 @@ def editarEvento(request, id):
             evento.save()
             eventos=Evento_db.objects.all()
             return render(request, "leerEventos.html", {"eventos":eventos})
-        else:
-            form=EventoForm(initial={"propietario":evento.propietario, "titulo":evento.titulo, "subtitulo":evento.subtitulo, "cuerpo":evento.cuerpo, "autor":evento.autor, "fecha":evento.fecha, "imagen":evento.imagen})
-            return render(request, "editarEvento.html", {"formulario":form, "evento":evento})
     else:
-        form=EventoForm()
-        return render(request, "eventoFormulario.html", {"formulario":form})
-
-
-def leerEventos(request):
-    eventos=Evento_db.objects.all()
-    return render(request, "leerEventos.html", {"eventos": eventos})
+        form=EventoForm(initial={"propietario":evento.propietario, "titulo":evento.titulo, "subtitulo":evento.subtitulo, "cuerpo":evento.cuerpo, "autor":evento.autor, "fecha":evento.fecha, "imagen":evento.imagen})
+        return render(request, "editarEvento.html", {"formulario":form, "evento":evento})
+    
 
 def leerMas(request, id):
     evento=Evento_db.objects.get(id=id)

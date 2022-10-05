@@ -150,7 +150,7 @@ LOGOUT_REDIRECT_URL = '/ingresar'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = '/ingresar'
+LOGIN_URL = '/App_usuarios/ingresar'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS =[os.path.join(BASE_DIR,"static")]
