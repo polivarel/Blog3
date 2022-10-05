@@ -5,27 +5,41 @@
 {% block cuerpo %}
 
 <h1>LISTADO DE ENTRADAS DEL BLOG</h1>
-<a href="{% url 'evento_Formulario' %}"><input type="button" value="AGREGAR UN EVENTO" ></a>
 {% if eventos %}
 <style>
     .div_evento{
-        height: 200px;
-        width: 200px;
+        margin-bottom: 30px;
+        height: 300px;
+        width: 300px;
         border: 1px solid gray;
+        position: relative;
+    } .div_evento:hover{border:1px dotted orangered;}
+    .div_evento img{
+        width: 100%;
+        height: 100%;
     }
+    .div_evento .admin_edit{position: absolute;   top: 8px;  right: 46px;} 
+    .div_evento .admin_dele{position: absolute;   top: 8px;  right: 6px;}
+    .img_edit{ width: 30px !important; height: 30px !important; background: white; padding: 4px; -webkit-border-radius: 15px 15px 15px 15px; border-radius: 15px 15px 15px 15px;}
+    .div_evento .div_titulo{position: absolute;   top: 38px;  left: 6px; background: black; opacity: .8; color:white ; padding:4px ;  -webkit-border-radius: 5px 5px 5px 5px; border-radius: 5px 5px 5px 5px; border: 1px solid white;}
+    .div_evento .div_estreno{position: absolute;   top: 8px;  left: 6px; background: black; opacity: .8; color:white ; padding:4px ;  -webkit-border-radius: 5px 5px 5px 5px; border-radius: 5px 5px 5px 5px; border: 1px solid white;}
+    .div_evento .div_leermas{position: absolute;   bottom: 8px;  left: 118px; background: black; opacity: .8; color:white ; padding:4px ;  -webkit-border-radius: 5px 5px 5px 5px; border-radius: 5px 5px 5px 5px; border: 1px solid white;}
     
 </style>
-<ul>
+
+    <div style="width: 100%; display: flex; flex-wrap:wrap; flex-flow:center;  justify-content:space-evenly; height:100% ;">
     {% for evento in eventos %}  
         <div class="div_evento">
-            <img src="{{ MEDIA_URL }}ScoobyDoo.jpg" class="{{ evento.imagen }}" alt="Fondo">
-            <h4>{{ evento.titulo }}, {{ evento.subtitulo }}, {{ evento.fecha }}, {{ evento.autor }} <a href="{% url 'leerMas' evento.id %}">Leer mas</a> </h4>
-            <a class="btn btn-danger" href="{% url 'eliminarEvento' evento.id %}">ELIMINAR</a>
-            <a class="btn btn-success" href="{% url 'editarEvento' evento.id %}">EDITAR</a>
+            <img src="{{ MEDIA_URL }}{{evento.imagen}}" alt="Fondo">
+            <a class="admin_dele" href="{% url 'eliminarEvento' evento.id %}"><img class="img_edit" src="{% static 'assets/img/icono_borrar.png' %}"  ></a>
+            <a class="admin_edit" href="{% url 'editarEvento' evento.id %}"  ><img class="img_edit" src="{% static 'assets/img/icono_editar.png' %}"  ></a>
+            <span class="div_titulo">{{ evento.titulo }}</span> 
+            <span class="div_estreno">{{ evento.fecha }}</span> 
+            <a class="div_leermas" href="{% url 'leerMas' evento.id %}"><input type="button" value="Leer más"></a>
         </div>
     {% endfor %} 
+    </div>
 
-</ul>
 
 {% else %}
 <p>NO SE ENCONTRARON ENTRADAS</p>

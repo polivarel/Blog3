@@ -106,6 +106,9 @@
                     <a  href="{% url 'index' %}"      >Inicio        </a>&nbsp;&nbsp;&nbsp;&nbsp;
                     <a  href="{% url 'about' %}"      >Sobre Nosotros</a>&nbsp;&nbsp;&nbsp;&nbsp;
                     <a  href="{% url 'leerEventos' %}">Eventos       </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    {% if user.is_superuser %}
+                        <a href="{% url 'evento_Formulario' %}"> <--Agregar </a>
+                    {% endif %}
                 </div>
                 <div class="menu_salir">
                     {% if not user.is_authenticated %}
@@ -117,10 +120,14 @@
                         {% if user.is_superuser %}
                         <a href="{% url 'listar_usuarios' %}">{{ user }}@admin</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="nav-menu_hover_item" href="{% url 'verContactos' %}">Mensajes</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                         <a class="nav-menu_hover_item" href="{% url 'salir' %}">Cerrar Sesion</a>
                       
                         {% else %}
                             <a class="nav-menu_hover_item" href="{% url 'ver_perfil' %}">{{ user.username }}</a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a class="nav-menu_hover_item" href="{% url 'verContactos' %}">Mensajes</a>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                             <a class="nav-menu_hover_item" href="{% url 'salir' %}">Cerrar Sesion</a>
                         {% endif %}

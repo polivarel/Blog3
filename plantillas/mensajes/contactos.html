@@ -1,0 +1,20 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+{% if mensaje %}
+    
+{% else %}
+  <style>.errorlist{color:red;}</style>
+  <form action="{% url 'mensajeA' %}" method="POST">{% csrf_token %}
+    <h2 style="text-align:center;">ENVIAR MENSAJE</h2><br>
+      <table>
+        {{ formulario_casilla.as_table }}
+      </table><br>
+      <button type="submit" style="width:100%;">ENVIAR</button><br><br><br>
+      <a href="{% url 'verContactos' %}"> <button type="button" style="width:100%;" >VOLVER</button> </a> <br><br><br>
+      <h2 style="text-align:center; color:red;">{{ mensaje }} </h2>  
+  </form><br>
+{% endif %}  
+{% endblock %}
