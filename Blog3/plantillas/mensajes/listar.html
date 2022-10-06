@@ -1,0 +1,38 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+    {% if usuarios %}
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+        th{
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+
+        
+        <table> 
+            {% for usuario in usuarios %}
+                {% if usuario.username != user.username %}
+                    <tr>
+                        <td>{{ usuario.username }} {% if usuario.first_name != "" %} ( {{ usuario.first_name }} {{ usuario.last_name}} ){% endif %}</td>
+                        <td>{{usuarioLogeado}}<a href="{% url 'Form_mensajeA' usuario.id %}"><img src="{% static 'assets/img/icono_mensaje.png' %}"     height="30px"></a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No hay usuarios registrados.</p>
+    {% endif %}
+    
+
+{% endblock %}   

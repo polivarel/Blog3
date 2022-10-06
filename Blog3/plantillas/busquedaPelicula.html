@@ -1,0 +1,18 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+
+<!--div class="masthead-subheading">Formulario de peliculas</div-->
+
+<form action="{% url 'buscar' %}" method="GET"> 
+
+  <input type="text" name="titulo">
+  <input type="submit" value="buscar">
+
+</form>
+
+{{ mensaje }}
+
+{% endblock %} 

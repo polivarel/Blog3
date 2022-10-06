@@ -1,0 +1,25 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+
+<!--div class="masthead-subheading">Formulario de peliculas</div-->
+
+<h1>Busqueda de peliculas</h1>
+
+{% if peliculas %}  
+
+<ul>
+  {% for pelicula in peliculas %}
+  <li>{{pelicula.titulo}}</li>
+  <br>
+  {% endfor %}
+</ul>
+
+{% else %}
+<p>No se encontraron peliculas con ese nombre</p>
+
+{% endif %}  
+
+{% endblock %} 

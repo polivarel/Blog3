@@ -1,0 +1,17 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+
+<!--div class="masthead-subheading">Formulario de peliculas</div-->
+
+<form action="{% url 'teatroFormulario' %}" method="POST"> {% csrf_token %}
+
+    <table>
+        {{ formulario.as_table }}
+    </table>
+    <input type="submit" value="Enviar">
+</form>
+
+{% endblock %} 
