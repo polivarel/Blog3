@@ -3,18 +3,38 @@
 {% load static %}
 
 {% block cuerpo %}
-{% if mensaje %}
+    {% if usuarios %}
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+        th{
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+
+        
+        <table> 
+            {% for usuario in usuarios %}
+                {% if usuario.username != user.username %}
+                {% if usuario.username %}
+                    <tr>
+                        <td>{{ usuario.username }} {% if usuario.first_name != "" %} ( {{ usuario.first_name }} {{ usuario.last_name}} ){% endif %}</td>
+                        <td>{{usuarioLogeado}}<a href="{% url 'Form_mensajeA' usuario.id usuario.username %}" ><img src="{% static 'assets/img/icono_mensaje.png' %}"     height="30px"></a></td>
+                    </tr>
+                {% endif %}
+                {% endif %}
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No hay usuarios registrados.</p>
+    {% endif %}
     
-{% else %}
-  <style>.errorlist{color:red;}</style>
-  <form action="{% url 'mensajeA' %}" method="POST">{% csrf_token %}
-    <h2 style="text-align:center;">ENVIAR MENSAJE</h2><br>
-      <table>
-        {{ formulario_casilla.as_table }}
-      </table><br>
-      <button type="submit" style="width:100%;">ENVIAR</button><br><br><br>
-      <a href="{% url 'verContactos' %}"> <button type="button" style="width:100%;" >VOLVER</button> </a> <br><br><br>
-      <h2 style="text-align:center; color:red;">{{ mensaje }} </h2>  
-  </form><br>
-{% endif %}  
-{% endblock %}
+
+{% endblock %}   
