@@ -22,11 +22,7 @@ from django.http import JsonResponse
 
 def verContactos(request):
     usuarios = User.objects.all()
-    #user = User.objects.get(username=request.user.username)
     return render(request, "mensajes/contactos.html", {"usuarios":usuarios})
-
-
-
 
 
 
