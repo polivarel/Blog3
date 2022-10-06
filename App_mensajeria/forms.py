@@ -1,4 +1,5 @@
 from logging import PlaceHolder
+from multiprocessing.sharedctypes import Value
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -52,8 +53,8 @@ class form_verMensajes(forms.ModelForm):
         return username   """  
 
 
-class Form_mensajeAa(forms.ModelForm):
-    mensaje = forms.CharField(label='Mensaje')
+class Form_mensajeA(forms.ModelForm):
+    mensaje = forms.CharField(label='')
     class Meta:
         model = User
         fields = ['mensaje']
@@ -64,32 +65,20 @@ class Form_mensajeAa(forms.ModelForm):
 #=========================== FORMULARIOS DEL USUARIO ===========================
 
 
+# class PeliForm(forms.Form):
+#     fecha_inicio = forms.DateField(initial=datetime.date.today, widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+#     lugar        = forms.CharField(max_length=50)
+#     titulo       = forms.CharField(max_length=180)
+#     hora_inicio  = forms.TimeField( widget=forms.widgets.DateInput(attrs={'type': 'time'}))
+#     edad_minima  = forms.DecimalField(min_value=1)
+#     puntaje      = forms.DecimalField(min_value=1,max_value=100)
 
 
 
+# class TeatroForm(forms.Form):
+#     titulo = forms.CharField(max_length=180)
+#     lugar  = forms.CharField(max_length=50)
 
-
-
-
-
-
-
-
-
-class PeliForm(forms.Form):
-    fecha_inicio = forms.DateField(initial=datetime.date.today, widget=forms.widgets.DateInput(attrs={'type': 'date'}))
-    lugar        = forms.CharField(max_length=50)
-    titulo       = forms.CharField(max_length=180)
-    hora_inicio  = forms.TimeField( widget=forms.widgets.DateInput(attrs={'type': 'time'}))
-    edad_minima  = forms.DecimalField(min_value=1)
-    puntaje      = forms.DecimalField(min_value=1,max_value=100)
-
-
-
-class TeatroForm(forms.Form):
-    titulo = forms.CharField(max_length=180)
-    lugar  = forms.CharField(max_length=50)
-
-class DeporteForm(forms.Form):
-    titulo = forms.CharField(max_length=180)
-    lugar  = forms.CharField(max_length=50)
+# class DeporteForm(forms.Form):
+#     titulo = forms.CharField(max_length=180)
+#     lugar  = forms.CharField(max_length=50)

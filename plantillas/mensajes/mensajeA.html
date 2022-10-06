@@ -1,0 +1,50 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+<style>.errorlist{color:red;}</style>
+{% if mensaje %}
+  <h2 style="text-align:center; color:red;">{{ mensaje }} </h2>
+{% else %}
+<style> 
+*{margin: 0; padding: 0;}
+  #id_mensaje{
+    margin-top: 0 !important;
+    width: 300px;
+    height:40px;
+    align-self:center;
+    font-size: 20px;
+    border: 1px solid black;border-right: none;
+    outline: none;
+    padding-left: 5px;
+  }
+
+</style>
+<p style="text-align:center;">ENVIAR MENSAJE A <b style="padding: 7px; background:rgb(224, 142, 87); color: white;">{{ nick }}</b></p>
+<form action="{% url 'Form_mensajeA' id nick %}" method="POST" style="height:40px; width: 100%; display:flex;  justify-content:center; align-items:stretch ; ">{% csrf_token %}
+  {{ formulario_mensajeA }}
+  <button type="submit" style="border-left: none; align-self:center; height:40px; width:50px; " id="enviarMensaje" ><img src="{% static 'assets/img/icono_enter.png' %}"></button>
+</form><br>
+<div id="casilla">Cargando mensajes...</div>  
+<a  href="{% url 'mensajes_old' id user.id nick %}"><input type="button" value="Ver mensajes antiguos"></a>
+
+
+<script type="text/javascript">
+
+var id1 = {{ id }};
+var id2 = {{ user.id }};
+
+var intervalId = window.setInterval(function(){
+  $('#casilla').load("/App_mensajeria/mensajes/"+id1+"/"+id2);
+
+}, 100);
+
+$("#id_mensaje").focus();
+</script>
+
+
+{% endif %}  
+{% endblock %}
+
+
