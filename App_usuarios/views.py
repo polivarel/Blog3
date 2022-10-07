@@ -14,11 +14,13 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, User
 from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 
 
 from django.shortcuts import render
+
 
 def crear_usuario(request):
     if request.method == 'POST':
@@ -52,11 +54,12 @@ def form_ingresar_usuario(request):
         form=AuthenticationForm()
         return render(request, "usuarios/ingresar.html", {"formulario":form})
 
+@staff_member_required
 def listar_usuarios(request):
     usuarios = User.objects.all()
     return render(request, "usuarios/listar.html", {"usuarios":usuarios})
 
-
+@staff_member_required
 def editar_usuarios(request,id):
     usuario = User.objects.get(id=id)
     if request.method == 'POST':
@@ -67,13 +70,14 @@ def editar_usuarios(request,id):
             usuario.last_name  = form.cleaned_data.get('last_name')
             usuario.email      = form.cleaned_data.get('email')
             usuario.save()
-            return render(request, 'usuarios/editar.html', {'mensaje':"Editado correctamente"})
+            return redirect('/App_usuarios/listar_usuarios/')
         else:
             return render(request, "usuarios/editar.html", {"formulario":form, "usuario":usuario, "mensaje":"FORMULARIO INVALIDO"})
     else:
         form = form_editar_usuarios(instance=usuario)
         return render(request, 'usuarios/editar.html', {'formulario': form, "usuario":usuario})
 
+@staff_member_required
 def eliminar_usuario(request,id):
     usuario = User.objects.get(id=id)
     usuario.delete()

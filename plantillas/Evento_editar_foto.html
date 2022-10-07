@@ -1,0 +1,20 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+
+
+<img src="{{ MEDIA_URL }}{{evento.imagen}}" alt="Fondo" width="250px" height="250px">
+<form action="{% url 'editarFotoEvento' evento.id %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+    <table>
+        {{ form_Editar_Imagen_Evento.as_table }}
+    </table>
+    <input type="submit" value="Guardar cambios" style="width:100%;"><br>
+    <a  href="{% url 'editarEvento' evento.id %}"      >
+    <input type="button" value="Cancelar" style="width:100%;">  
+    </a>
+</form>  <br>
+
+<hr style="border-bottom:2px solid grey ;" >
+{% endblock %} 

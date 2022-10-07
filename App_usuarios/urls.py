@@ -35,7 +35,6 @@ urlpatterns = [
     path('salir', LogoutView.as_view(next_page="ingresar/"), name='salir'),
     path("listar_usuarios/", listar_usuarios, name="listar_usuarios"),
     path("editar_usuarios/<int:id>", editar_usuarios, name="form_editar_usuarios"),
-    path("listar_usuarios/", listar_usuarios, name="listar_usuarios"),
     path("eliminar_usuario/<int:id>", eliminar_usuario, name="form_eliminar_usuario"),
     path("ver_perfil/", ver_perfil, name="ver_perfil"), 
 ]

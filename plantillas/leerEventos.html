@@ -31,15 +31,23 @@
     {% for evento in eventos %}  
         <div class="div_evento">
             <img src="{{ MEDIA_URL }}{{evento.imagen}}" alt="Fondo">
-            <a class="admin_dele" href="{% url 'eliminarEvento' evento.id %}"><img class="img_edit" src="{% static 'assets/img/icono_borrar.png' %}"  ></a>
+            {% if user.is_superuser %}
+            <img onclick="BorrarEvento( '{{ evento.titulo }}','{{ evento.id }}')" class="admin_dele img_edit" src="{% static 'assets/img/icono_borrar.png' %}"  >
             <a class="admin_edit" href="{% url 'editarEvento' evento.id %}"  ><img class="img_edit" src="{% static 'assets/img/icono_editar.png' %}"  ></a>
+            {% endif %}
             <span class="div_titulo">{{ evento.titulo }}</span> 
             <span class="div_estreno">{{ evento.fecha }}</span> 
             <a class="div_leermas" href="{% url 'leerMas' evento.id %}"><input type="button" value="Leer más"></a>
         </div>
     {% endfor %} 
     </div>
-
+    <script>
+        function BorrarEvento(titulo,id){
+            alertify.confirm('Cuidado', 'Desea borrar el evento <b>'+ titulo + '</b>',
+            function(){ window.location.replace("/App_eventos/eliminarEvento/"+id); },
+            function(){ alertify.error('No paso nada :)')}).set('labels', {ok:'Si!', cancel:'Noo!'});
+        }
+    </script>
 
 {% else %}
 <p>NO SE ENCONTRARON ENTRADAS</p>
