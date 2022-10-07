@@ -88,4 +88,32 @@ def ver_perfil(request, username= None):
         user = current_user
         return render (request, "usuarios/perfil.html", {"user":user})
         
+
+@login_required
+def agregarAvatar(request):
+    if request.method == "POST":
+        formulario=AvatarForm(request.POST, request.FILES)
+        if formulario.is_valid():
+            avatarViejo= Avatar.objects.filter(user=request.user)
+            if len(avatarViejo) > 0:
+                avatarViejo[0].delete()
+            
+            avatar=Avatar(user = request.user, imagen = formulario.cleaned_data['imagen'])
+            avatar.save()
+            return render (request, "usuarios/perfil.html", {"usuario":request.user , "mensaje":"Avatar agregado exitosamente!!",
+            "imagen":avatar.imagen.url})
+        else:
+            return render (request, "usuarios/agregarAvatar.html", {"formulario":formulario, "mensaje":"FORMULARIO INVALIDO!!"})
+    else:
+        formulario=AvatarForm()
+        return render (request, "usuarios/agregarAvatar.html" , {"formulario":formulario , "usuario":request.user})
+
+@login_required
+def obtenerAvatar(request):
+    lista=Avatar.objects.filter(user=request.user)
+    if len(lista) != 0:
+        imagen = lista[0].imagen.url
+    else:
+        imagen = ""
+    return imagen
                                 

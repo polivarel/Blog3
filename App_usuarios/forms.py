@@ -71,3 +71,7 @@ class form_eliminar_usuario(forms.ModelForm):
     class Meta:
         model = User
         fields = ['id','username']    
+
+
+class AvatarForm(forms.Form):
+    imagen= forms.ImageField(label = "Imagen")
