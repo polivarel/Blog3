@@ -1,0 +1,34 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+{% if mensaje %}
+    <p>Usuario <b>{{ mensaje }}</b> correctamente ! <br> Redireccionando en <span id="redirecionando">4</span></p>
+    <script>
+        var segundos = 4;
+        var redirecionando = document.getElementById("redirecionando");
+        var intervalo = setInterval(function(){
+            segundos--;
+            redirecionando.innerHTML = segundos;
+            if(segundos == 0){
+                clearInterval(intervalo);
+                irA("/listar_usuarios");
+            }
+        }, 1000);
+    </script>
+{% else %}
+  <style>.errorlist{color:red;}</style>
+  <form action="{% url 'form_editar_usuarios' usuario.id %}" method="POST">{% csrf_token %}
+    <h2 style="text-align:center;">Editar usuario</h2><br>
+    <table>
+      {{ formulario.as_table }}
+    </table><br>
+    <button type="submit" style="width:100%;">Guardar</button><br><br>
+    <a class="nav-menu_hover_item" href="{% url 'listar_usuarios' %}">
+      <button type="button" style="width:100%;" >Volver</button>
+    </a><br><br><br>
+    <h2 style="text-align:center; color:red;">{{ mensaje }} </h2>  
+  </form><br>
+{% endif %}  
+{% endblock %}

@@ -40,7 +40,7 @@
                 <script>
                     function BorrarUsuario(usuario,id){
                         alertify.confirm('Cuidado', 'Desea borrar al usuario <b>'+ usuario + '</b>',
-                        function(){ irA("/eliminar_usuario/"+id); },
+                        function(){ window.location.replace("/App_usuarios/eliminar_usuario/"+id); },
                         function(){ alertify.error('No paso nada :)')}).set('labels', {ok:'Si, a la verga!', cancel:'Noo!'});
                     }
                 </script>

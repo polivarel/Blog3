@@ -1,0 +1,53 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+    <style>
+        .errorlist{color:red;}
+        .div_chat{ 
+        font-size: 17px;
+            padding: 3px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            -webkit-border-radius: 5px 5px 5px 5px;
+            border-radius: 5px 5px 5px 5px;
+            margin-bottom: 3px;
+            max-width: 550px;
+            border: none;
+        }
+        .usuario1{
+        background: #20BF57;
+        color: white;
+
+        margin-right:100px;
+    }
+
+    .usuario2{
+        background: rgb(224, 142, 87);
+        color: rgb(250, 250, 250);
+
+        margin-left: 100px;
+    }
+</style>
+    <div style="max-height: 750px; overflow: scroll;">
+        {% for mensaje in mensajes %}
+            {% if mensaje.emisor == user.id or mensaje.receptor == user.id %}
+                {% if mensaje.emisor == user.id %} 
+                    <div class="usuario1 div_chat">
+                        <p><b>Tu:  </b>{{ mensaje.mensaje }}</p>
+                        <p style="border-top:1px solid green;            color:rgb(210, 238, 197); text-align:right; font-size:11px;">{{ mensaje.fecha }}</p>
+                    </div>
+                {% else %}
+                    <div class="usuario2 div_chat">
+                        <p><b>{{ nick }}:  </b>   {{ mensaje.mensaje }}</p>
+                        <p style="border-top:1px solid rgb(230, 110, 31); color:rgb(235, 221, 221); text-align:right; font-size:11px;">{{ mensaje.fecha }}</p>
+                    </div>
+                {% endif %}
+            {% else %}
+                <p>Bandido....no debería de estar haciendo eso ....</p>
+            {% endif %}
+        {% endfor %}
+    </div>  
+    <a href="{% url 'Form_mensajeA' id1 nick %}" > <input type="button" value="VOLVER" style="font-size:20px; padding:10px;" > </a>
+{% endblock %}

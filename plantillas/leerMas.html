@@ -4,18 +4,39 @@
 
 {% block cuerpo %}
 
-<h1> {{ evento.titulo }} </h1>
 
-<ul>
-     
-    <li>{{ evento.titulo }}</li>
-    <li>{{ evento.subtitulo }}</li> 
-    <li>{{ evento.fecha }}</li> 
-    <li>{{ evento.imagen }}</li>
-    <li>{{ evento.cuerpo }}</li>
-    <li>{{ evento.autor }}</li>
+<style>
+    .tb_verMas td{border-bottom: 1px solid blue;}
+</style>
+<table style="padding: 10px; font-size: 25px;" class="tb_verMas">
+    <tr>
+        <td colspan="2">
+            {{ evento.titulo }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="{{ MEDIA_URL }}{{evento.imagen}}" alt="Fondo" width="250px" height="250px">
+        </td>
+        <td>
+            {{ evento.subtitulo }}<br>
+            {{ evento.fecha }}<br>
+        </td>       
+    </tr>
+    <tr>
+        <td colspan="2">
+            {{ evento.cuerpo }}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            Autor: {{ evento.autor }}
+        </td>
+    </tr>
+</table>
+
     
-</ul>
+
 
 
 {% endblock %} 

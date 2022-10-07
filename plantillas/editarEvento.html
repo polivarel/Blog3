@@ -4,6 +4,11 @@
 
 {% block cuerpo %}
 
+
+<img src="{{ MEDIA_URL }}{{evento.imagen}}" alt="Fondo" width="250px" height="250px">
+<a href="{% url 'editarFotoEvento' evento.id %}" ><input type="button" value="Cambiar imagen"></a>
+<hr style="border-bottom:2px solid grey ;">
+
 <form action="{% url 'editarEvento' evento.id %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
 
     <table>
