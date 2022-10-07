@@ -1,5 +1,7 @@
 from App_usuarios.forms import *
 from App_eventos.models import *
+from App_usuarios.models import *
+from App_usuarios.views import *
 
 
 from email.mime import image
@@ -34,7 +36,7 @@ def crear_usuario(request):
             return render(request, "usuarios/crear.html", {"formulario":form})    
     else:
         form = form_crear_usuario()
-        return render(request, 'usuarios/crear.html', {'formulario': form})
+        return render(request, 'usuarios/crear.html', {'formulario': form, "avatar":obtenerAvatar(request)})
 
 def form_ingresar_usuario(request):
     if request.method=="POST":
@@ -52,14 +54,14 @@ def form_ingresar_usuario(request):
             return render(request, "usuarios/ingresar.html", {"formulario":form, "mensaje":"Usuario o contraseña incorrectos"})
     else:
         form=AuthenticationForm()
-        return render(request, "usuarios/ingresar.html", {"formulario":form})
+        return render(request, "usuarios/ingresar.html", {"formulario":form, "avatar":obtenerAvatar(request)})
 
 @staff_member_required
 def listar_usuarios(request):
     usuarios = User.objects.all()
-    return render(request, "usuarios/listar.html", {"usuarios":usuarios})
+    return render(request, "usuarios/listar.html", {"usuarios":usuarios, "avatar":obtenerAvatar(request)})
 
-@staff_member_required
+@login_required
 def editar_usuarios(request,id):
     usuario = User.objects.get(id=id)
     if request.method == 'POST':
@@ -70,18 +72,21 @@ def editar_usuarios(request,id):
             usuario.last_name  = form.cleaned_data.get('last_name')
             usuario.email      = form.cleaned_data.get('email')
             usuario.save()
-            return redirect('/App_usuarios/listar_usuarios/')
+            if usuario.is_superuser:
+                return redirect('/App_usuarios/listar_usuarios/')
+            else:
+                return redirect('/App_usuarios/ver_perfil/')
         else:
             return render(request, "usuarios/editar.html", {"formulario":form, "usuario":usuario, "mensaje":"FORMULARIO INVALIDO"})
     else:
         form = form_editar_usuarios(instance=usuario)
-        return render(request, 'usuarios/editar.html', {'formulario': form, "usuario":usuario})
+        return render(request, 'usuarios/editar.html', {'formulario': form, "usuario":usuario, "avatar":obtenerAvatar(request)})
 
 @staff_member_required
 def eliminar_usuario(request,id):
     usuario = User.objects.get(id=id)
     usuario.delete()
-    return redirect('listar_usuarios')
+    return redirect('listar_usuarios', {"avatar":obtenerAvatar(request)})
 
 @login_required
 def ver_perfil(request, username= None):
@@ -90,7 +95,7 @@ def ver_perfil(request, username= None):
         user = User.objects.get(username=username)
     else:
         user = current_user
-        return render (request, "usuarios/perfil.html", {"user":user})
+        return render (request, "usuarios/perfil.html", {"user":user, "avatar":obtenerAvatar(request)})
         
 
 @login_required

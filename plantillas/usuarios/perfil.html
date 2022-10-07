@@ -11,6 +11,13 @@
 <h4>Apellido : {{ user.last_name }}</h4>
 <h4>Email : {{ user.email }}</h4>
 
+<img height="150px" src="{{ imagen }}" alt="Avatar">
+<li>
+    <a href="{% url 'agregarAvatar' %}">Agregar Avatar</a>
+</li>
+<li>
+    <a href="{% url 'editar_usuarios' user.id %}">Editar Perfil</a>
+</li>
 
 </p>
 

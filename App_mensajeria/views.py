@@ -5,13 +5,15 @@ from django.shortcuts import render, redirect
 from random import *
 from App_mensajeria.forms import *
 from App_mensajeria.models import *
+from App_usuarios.models import *
+from App_usuarios.views import *
    
 from django.db.models import Q
 
 
 def verContactos(request):
     usuarios = User.objects.all()
-    return render(request, "mensajes/contactos.html", {"usuarios":usuarios})
+    return render(request, "mensajes/contactos.html", {"usuarios":usuarios, "avatar":obtenerAvatar(request)})
 
 
 
@@ -27,7 +29,7 @@ def mensajeA(request,id,nick):
             return render(request, "mensajes/mensajeA.html", {"formulario_casilla":form})    
     else:
         form = Form_mensajeA()
-        return render(request, 'mensajes/mensajeA.html', {'id':id,'nick':nick,'formulario_mensajeA': form})
+        return render(request, 'mensajes/mensajeA.html', {'id':id,'nick':nick,'formulario_mensajeA': form, "avatar":obtenerAvatar(request)})
 
 
 
@@ -36,11 +38,11 @@ def mensajes(request,id1,id2):
     mensajes = mensajes_db.objects.filter(
         Q(emisor=id1, receptor=id2) | Q(emisor=id2, receptor=id1)
     ).order_by('-id')
-    return render(request, "mensajes/mensajes.html", {"mensajes":mensajes})
+    return render(request, "mensajes/mensajes.html", {"mensajes":mensajes, "avatar":obtenerAvatar(request)})
 
 
 def mensajes_old(request,id1,id2,nick):
     mensajes = mensajes_db.objects.filter(
         Q(emisor=id1, receptor=id2) | Q(emisor=id2, receptor=id1)
     ).order_by('id')
-    return render(request, "mensajes/mensajesAntiguos.html", {"mensajes":mensajes,"nick":nick,"id1":id1})
+    return render(request, "mensajes/mensajesAntiguos.html", {"mensajes":mensajes,"nick":nick,"id1":id1, "avatar":obtenerAvatar(request)})

@@ -34,12 +34,7 @@ urlpatterns = [
     path("form_crear_usuario/", crear_usuario, name="form_crear_usuario"),
     path('salir', LogoutView.as_view(next_page="ingresar/"), name='salir'),
     path("listar_usuarios/", listar_usuarios, name="listar_usuarios"),
-<<<<<<< HEAD
     path("editar_usuarios/<int:id>", editar_usuarios, name="editar_usuarios"),
-    path("listar_usuarios/", listar_usuarios, name="listar_usuarios"),
-=======
-    path("editar_usuarios/<int:id>", editar_usuarios, name="form_editar_usuarios"),
->>>>>>> e47baa2b0f35ca41a433d91f346c74b9a876faac
     path("eliminar_usuario/<int:id>", eliminar_usuario, name="form_eliminar_usuario"),
     path("ver_perfil/", ver_perfil, name="ver_perfil"),
     path("agregarAvatar/", agregarAvatar, name="agregarAvatar"),

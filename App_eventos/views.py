@@ -1,6 +1,8 @@
 from App_eventos.models import *
 from django import forms
 from App_eventos.forms import *
+from App_usuarios.models import *
+from App_usuarios.views import *
 
 
 from logging import PlaceHolder
@@ -46,19 +48,19 @@ def evento(request):
             return render(request, "eventoFormulario.html",{"mensaje":"Formulario invalido"})
     else:
         form=EventoForm()
-        return render(request, "eventoFormulario.html", {"formulario_evento":form})
+        return render(request, "eventoFormulario.html", {"formulario_evento":form, "avatar":obtenerAvatar(request)})
 
 @login_required
 def leerEventos(request):
     eventos=Evento_db.objects.all()
-    return render(request, "leerEventos.html", {"eventos": eventos})
+    return render(request, "leerEventos.html", {"eventos": eventos, "avatar":obtenerAvatar(request)})
 
 @staff_member_required
 def eliminarEvento(request, id):
     evento=Evento_db.objects.get(id=id)
     evento.delete()
     eventos=Evento_db.objects.all()
-    return render(request, "leerEventos.html", {"eventos": eventos})
+    return render(request, "leerEventos.html", {"eventos": eventos, "avatar":obtenerAvatar(request)})
 
 @staff_member_required
 def editarEvento(request, id):
@@ -76,7 +78,7 @@ def editarEvento(request, id):
             return render(request, "leerEventos.html", {"eventos":eventos})
     else:
         form=EditarEventoForm(initial={ "titulo":evento.titulo, "subtitulo":evento.subtitulo, "cuerpo":evento.cuerpo, "fecha":evento.fecha, "imagen":evento.imagen})
-        return render(request, "editarEvento.html", {"formulario":form, "evento":evento})
+        return render(request, "editarEvento.html", {"formulario":form, "evento":evento, "avatar":obtenerAvatar(request)})
     
 
 
@@ -95,7 +97,7 @@ def editarFotoEvento(request, id):
             return redirect('/App_eventos/editarEvento/'+id)
     else:
         form=Foto_EventoForm()
-        return render(request, "Evento_editar_foto.html", {"form_Editar_Imagen_Evento":form, "evento":evento})
+        return render(request, "Evento_editar_foto.html", {"form_Editar_Imagen_Evento":form, "evento":evento, "avatar":obtenerAvatar(request)})
 
 
 
@@ -103,4 +105,4 @@ def editarFotoEvento(request, id):
 
 def leerMas(request, id):
     evento=Evento_db.objects.get(id=id)
-    return render(request, "leerMas.html", {"evento":evento})
+    return render(request, "leerMas.html", {"evento":evento, "avatar":obtenerAvatar(request)})

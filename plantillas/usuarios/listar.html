@@ -34,7 +34,7 @@
                     <td>{{ usuario.first_name }}</td>
                     <td>{{ usuario.last_name }}</td>
                     <td>{{ usuario.email }}</td>
-                    <td><a href="{% url 'form_editar_usuarios' usuario.id %}"><img src="{% static 'assets/img/icono_editar.png' %}"     height="30px"></a></td>
+                    <td><a href="{% url 'editar_usuarios' usuario.id %}"><img src="{% static 'assets/img/icono_editar.png' %}"     height="30px"></a></td>
                     <td><img onclick="BorrarUsuario( '{{ usuario.username }}','{{ usuario.id }}')" src="{% static 'assets/img/icono_borrar.png' %}"     height="30px"></td>
                 </tr>
                 <script>
