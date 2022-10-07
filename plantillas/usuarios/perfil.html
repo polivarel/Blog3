@@ -3,22 +3,36 @@
 {% load static %}
 
 {% block cuerpo %}
+<style>
 
-<p><center><h1>Bienvenido a tu perfil</h1></center><br>
+</style>
+<table>
+    <tr>
+        <td colspan="2">
+            <center><h1>Bienvenido a tu perfil</h1></center>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img height="150px" src="{{ avatar }}" alt="Avatar">
+        </td>
+        <td>
+            <h4>Usuario : {{ user.username }}</h4>
+            <h4>Nombre : {{ user.first_name }}</h4>
+            <h4>Apellido : {{ user.last_name }}</h4>
+            <h4>Email : {{ user.email }}</h4>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <center><a href="{% url 'agregarAvatar' %}"><input type="button" value="EDITAR AVATAR"></a></center>
+        </td>
+        <td>
+            <center><a href="{% url 'editar_usuarios' user.id %}"><input type="button" value="EDITAR PERFIL"></a></center>
+        </td>
+    </tr>
+</table>
 
-<h4>Usuario : {{ user.username }}</h4>
-<h4>Nombre : {{ user.first_name }}</h4>
-<h4>Apellido : {{ user.last_name }}</h4>
-<h4>Email : {{ user.email }}</h4>
 
-<img height="150px" src="{{ imagen }}" alt="Avatar">
-<li>
-    <a href="{% url 'agregarAvatar' %}">Agregar Avatar</a>
-</li>
-<li>
-    <a href="{% url 'editar_usuarios' user.id %}">Editar Perfil</a>
-</li>
-
-</p>
 
 {% endblock %} 
