@@ -86,7 +86,7 @@ def editar_usuarios(request,id):
 def eliminar_usuario(request,id):
     usuario = User.objects.get(id=id)
     usuario.delete()
-    return redirect('listar_usuarios', {"avatar":obtenerAvatar(request)})
+    return render(request, 'usuarios/listar.html', {"usuario":usuario,"mensaje":"Usuario eliminado correctamente!"})
 
 @login_required
 def ver_perfil(request, username= None):
@@ -95,7 +95,7 @@ def ver_perfil(request, username= None):
         user = User.objects.get(username=username)
     else:
         user = current_user
-        return render (request, "usuarios/perfil.html", {"user":user, "avatar":obtenerAvatar(request)})
+        return render (request, "usuarios/perfil.html", {"avatar":obtenerAvatar(request), "user":user})
         
 
 @login_required
