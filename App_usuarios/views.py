@@ -64,7 +64,7 @@ def listar_usuarios(request):
     #    imagen = lista[0].imagen.url
     #else:
     #    imagen = "/media/avatares/_perfil.jpg"
-    return render(request, "usuarios/listar.html", {"usuarios":usuarios, "imagen":imagen})
+    return render(request, "usuarios/listar.html", {"usuarios":usuarios, "avatar":obtenerAvatar(request)})
 
 @login_required
 def editar_usuarios(request,id):
@@ -130,4 +130,4 @@ def obtenerAvatar(request):
     else:
         imagen = "/media/avatares/_perfil.jpg"
     return imagen
-                                
+                            

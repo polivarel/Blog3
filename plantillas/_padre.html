@@ -118,7 +118,7 @@
 
                     {% else %}
                         {% if user.is_superuser %}
-                        <a href="{% url 'listar_usuarios' %}">{{ user }}@admin</a>
+                        <a href="{% url 'listar_usuarios' %}"><img style="float:left;" height="20px" src="{{ avatar }}" alt="X"> &nbsp;{{ user.username }}</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                         <a class="nav-menu_hover_item" href="{% url 'verContactos' %}">Mensajes</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;

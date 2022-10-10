@@ -21,8 +21,14 @@
         <a class="nav-menu_hover_item" href="{% url 'form_crear_usuario' %}">
             <input type="button" value="Crear usuario" style="margin: 20px;">
         </a>
-        
-        <table> <tr><th>ID              </th><th>Avatar             </th><th>Usuario               </th><th>Nombre                  </th><th>Apellido               </th><th>Correo             </th><th>Editar</th><th>Borrar</th></tr>
+        <a class="nav-menu_hover_item" href="{% url 'editar_usuarios' user.id %}">
+            <input type="button" value="Editar mi pefil" style="margin: 20px;">
+        </a>
+        <a class="nav-menu_hover_item" href="{% url 'agregarAvatar' %}">
+            <input type="button" value="Editar Avatar" style="margin: 20px;">
+        </a>
+
+        <table> <tr><th>ID              </th><th>Username             </th><th>Nombre               </th><th>Apellido                  </th><th>Email              </th><th>Editar             </th><th>Borrar</th>         
             {% for usuario in usuarios %}
                 <tr>
                     <td>{{ usuario.id }}</td>
@@ -46,6 +52,7 @@
                     }
                 </script>
             {% endfor %}
+            
         </table>
     {% else %}
         <p>No hay usuarios registrados.</p>
