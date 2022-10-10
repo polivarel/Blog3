@@ -10,7 +10,7 @@
 
 {% block cuerpo %}
 <h2>AGREGAR AVATAR</h2>
-
+<img height="150px" src="{{ avatar }}" alt="Avatar">
 <!--div class="masthead-subheading">Formulario de peliculas</div-->
 
 <form action="{% url 'agregarAvatar' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}

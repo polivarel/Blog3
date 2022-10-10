@@ -125,8 +125,8 @@
                         <a class="nav-menu_hover_item" href="{% url 'salir' %}">Cerrar Sesion</a>
                       
                         {% else %}
-                                <img height="40px" src="{{ imagen }}" alt="Avatar perfil">
-                            <a class="nav-menu_hover_item" href="{% url 'ver_perfil' %}">{{ user.username }}</a>
+                                
+                            <a class="nav-menu_hover_item" href="{% url 'ver_perfil' %}"><img style="float:left;" height="20px" src="{{ avatar }}" alt="X"> &nbsp;{{ user.username }}</a>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                             <a class="nav-menu_hover_item" href="{% url 'verContactos' %}">Mensajes</a>
                                 &nbsp;&nbsp;&nbsp;&nbsp;

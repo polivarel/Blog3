@@ -59,7 +59,12 @@ def form_ingresar_usuario(request):
 @staff_member_required
 def listar_usuarios(request):
     usuarios = User.objects.all()
-    return render(request, "usuarios/listar.html", {"usuarios":usuarios, "avatar":obtenerAvatar(request)})
+    imagen=Avatar.objects.all()
+    #if len(lista) != 0:
+    #    imagen = lista[0].imagen.url
+    #else:
+    #    imagen = "/media/avatares/_perfil.jpg"
+    return render(request, "usuarios/listar.html", {"usuarios":usuarios, "imagen":imagen})
 
 @login_required
 def editar_usuarios(request,id):
@@ -75,7 +80,7 @@ def editar_usuarios(request,id):
             if usuario.is_superuser:
                 return redirect('/App_usuarios/listar_usuarios/')
             else:
-                return redirect('/App_usuarios/ver_perfil/')
+                return redirect('/App_usuarios/accounts/profiles')
         else:
             return render(request, "usuarios/editar.html", {"formulario":form, "usuario":usuario, "mensaje":"FORMULARIO INVALIDO"})
     else:
@@ -89,7 +94,7 @@ def eliminar_usuario(request,id):
     return render(request, 'usuarios/listar.html', {"usuario":usuario,"mensaje":"Usuario eliminado correctamente!"})
 
 @login_required
-def ver_perfil(request, username= None):
+def ver_perfil(request, username=None):
     current_user = request.user
     if username and username != current_user.username:
         user = User.objects.get(username=username)
@@ -109,13 +114,13 @@ def agregarAvatar(request):
             
             avatar=Avatar(user = request.user, imagen = formulario.cleaned_data['imagen'])
             avatar.save()
-            return render (request, "usuarios/perfil.html", {"usuario":request.user , "mensaje":"Avatar agregado exitosamente!!",
+            return render (request, "usuarios/perfil.html", {"usuario":request.user ,"avatar":obtenerAvatar(request), "mensaje":"Avatar agregado exitosamente!!",
             "imagen":avatar.imagen.url})
         else:
             return render (request, "usuarios/agregarAvatar.html", {"formulario":formulario, "mensaje":"FORMULARIO INVALIDO!!"})
     else:
         formulario=AvatarForm()
-        return render (request, "usuarios/agregarAvatar.html" , {"formulario":formulario , "usuario":request.user})
+        return render (request, "usuarios/agregarAvatar.html" , {"formulario":formulario , "usuario":request.user, "avatar":obtenerAvatar(request)})
 
 @login_required
 def obtenerAvatar(request):
@@ -123,6 +128,6 @@ def obtenerAvatar(request):
     if len(lista) != 0:
         imagen = lista[0].imagen.url
     else:
-        imagen = ""
+        imagen = "/media/avatares/_perfil.jpg"
     return imagen
                                 
