@@ -4,16 +4,11 @@ from App_usuarios.models import *
 from App_usuarios.views import *
 
 
-from email.mime import image
 from pydoc import visiblename
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from random import *
-from django.template import RequestContext , loader
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-from django.urls import reverse_lazy    
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
-from django.contrib.auth import login, logout, authenticate, get_user_model
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.admin.views.decorators import staff_member_required
@@ -80,7 +75,7 @@ def editar_usuarios(request,id):
             if usuario.is_superuser:
                 return redirect('/App_usuarios/listar_usuarios/')
             else:
-                return redirect('/App_usuarios/accounts/profiles')
+                return redirect('/App_principal/pages')
         else:
             return render(request, "usuarios/editar.html", {"formulario":form, "usuario":usuario, "mensaje":"FORMULARIO INVALIDO"})
     else:
@@ -122,6 +117,7 @@ def agregarAvatar(request):
         formulario=AvatarForm()
         return render (request, "usuarios/agregarAvatar.html" , {"formulario":formulario , "usuario":request.user, "avatar":obtenerAvatar(request)})
 
+
 @login_required
 def obtenerAvatar(request):
     lista=Avatar.objects.filter(user=request.user)
@@ -130,4 +126,4 @@ def obtenerAvatar(request):
     else:
         imagen = "/media/avatares/_perfil.jpg"
     return imagen
-                            
+                        
